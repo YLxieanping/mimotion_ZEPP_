@@ -45,15 +45,11 @@ jobs:
           git add .
           git commit -m "persist tokens trigger by ${{ github.event_name }}"
           git push origin master
+          
       - name: 发送微信通知（Server酱）
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://sctapi.ftqq.com/${{ secrets.SCKEY }}.send'
           method: 'POST'
           contentType: 'application/x-www-form-urlencoded'
-          data: |
-            title=GitHub Action定时执行结果
-            desp=仓库：${{ github.repository }}
-            状态：${{ job.status }}
-            时间：${{ github.event.head_commit.timestamp }}
-            链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          data: "title=刷步数执行完成&desp=仓库：${{ github.repository }}%0A状态：${{ job.status }}%0A运行ID：${{ github.run_id }}%0A查看日志：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
