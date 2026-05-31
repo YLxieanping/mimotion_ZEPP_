@@ -47,3 +47,11 @@ jobs:
           method: 'POST'
           contentType: 'application/x-www-form-urlencoded'
           data: "title=刷步数执行完成&desp=仓库：${{ github.repository }}%0A状态：${{ job.status }}%0A运行ID：${{ github.run_id }}%0A查看日志：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Keep repo active（防止60天被禁用）
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git commit --allow-empty -m "Auto keepalive $(date)"
+          git push origin master
+          
