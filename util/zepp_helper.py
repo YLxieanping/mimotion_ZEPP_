@@ -244,6 +244,7 @@ def post_fake_brand_data(step, app_token, userid):
     t = get_time()
 
     today = get_beijing_time().strftime("%F")
+    print(f"北京时间={get_beijing_time().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"today={today}")
     print(f"t={t}")
 
