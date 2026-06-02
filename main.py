@@ -29,14 +29,16 @@ def get_min_max_by_time(hour=None, minute=None):
         minute = time_bj.minute
 
     # 夜间低步数，模拟手环真实睡眠/活动，夜间直接生效
-    if 0 <= hour < 2:
+    if 0 <= hour < 1:
         return 2000, 4000
-    elif 2 <= hour < 4:
+    elif 1 <= hour < 2:
         return 4000, 6500
-    elif 4 <= hour < 6:
-        return 6500, 10000
-    elif 6 <= hour < 8:
-        return 10000, 16000
+    elif 2 <= hour < 3:
+        return 6500, 8000
+    elif 3 <= hour < 4:
+        return 8000, 10000
+    elif 4 <= hour < 5:
+        return 10000, 15000
     else:
         min_step = get_int_value_default(config, 'MIN_STEP', 18000)
         max_step = get_int_value_default(config, 'MAX_STEP', 25000)
