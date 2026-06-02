@@ -5,23 +5,22 @@ import time
 import random
 
 def login_access_token(user, password):
-    url = "https://account-us.huami.com/v1/client/apps"
+    url = "https://account.huami.com/v2/client/login"
     data = {
         "app_name": "com.zepp.health",
         "client_id": "HuaMiHealth",
         "country_code": "CN",
         "email": user,
-        "password": password,
+        "password": password
     }
     try:
-        response = requests.post(url, data=data, timeout=15)
+        response = requests.post(url, data=data, timeout=20)
         res = response.json()
         if res.get("code") == 0:
             return res.get("access_token"), "登录成功"
         return None, res.get("message", "登录失败")
     except Exception as e:
         return None, str(e)
-
 
 def grant_login_tokens(access_token, device_id, is_phone):
     url = "https://api-zepp-cn.huami.com/v1/client/app_login"
@@ -40,7 +39,6 @@ def grant_login_tokens(access_token, device_id, is_phone):
     except Exception as e:
         return None, None, None, str(e)
 
-
 def grant_app_token(login_token):
     url = "https://api-zepp-cn.huami.com/v1/client/refresh_app_token"
     data = {"login_token": login_token}
@@ -52,7 +50,6 @@ def grant_app_token(login_token):
     except Exception as e:
         return None, str(e)
 
-
 def check_app_token(app_token):
     url = f"https://api-zepp-cn.huami.com/v1/user/profile?app_token={app_token}"
     try:
@@ -61,13 +58,10 @@ def check_app_token(app_token):
     except:
         return False, "无效"
 
-
-# ==============================================
-# 【夜间实时同步核心】手环模拟上传（保留！）
-# ==============================================
+# ===================== 夜间实时同步（保留） =====================
 def post_fake_brand_data(step, app_token, user_id):
     ts = int(time.time() * 1000)
-    device_id = f"MI_BAND_{random.randint(10000000, 99999999)}"
+    device_id = f"MI_BAND_{random.randint(10000000,99999999)}"
     step = int(step)
 
     data_json = {
