@@ -265,14 +265,14 @@ def post_fake_brand_data(step, app_token, userid):
 
     response = requests.post(url, data=data, headers=head)
     # 新增如下内容
-    print(f"北京时间={bj_time}", flush=True)
-    print(f"today={today}", flush=True)
-    print(f"t={t}", flush=True)
+    # print(f"北京时间={bj_time}", flush=True)
+    # print(f"today={today}", flush=True)
+    # print(f"t={t}", flush=True)
     
-    print("========== post_fake_brand_data ==========", flush=True)
-    print(f"status_code: {response.status_code}", flush=True)
-    print(f"response_text: {response.text}", flush=True)
-    print("==========================================", flush=True)
+    # print("========== post_fake_brand_data ==========", flush=True)
+    # print(f"status_code: {response.status_code}", flush=True)
+    # print(f"response_text: {response.text}", flush=True)
+    # print("==========================================", flush=True)
     #上述内容为临时新增打印查看
     if response.status_code != 200:
         return False, "请求修改步数异常：%d" % response.status_code
