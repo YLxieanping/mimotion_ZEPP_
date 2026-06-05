@@ -264,6 +264,12 @@ def post_fake_brand_data(step, app_token, userid):
     data = f'userid={userid}&last_sync_data_time=1597306380&device_type=0&last_deviceid=DA932FFFFE8816E7&data_json={data_json}'
 
     response = requests.post(url, data=data, headers=head)
+    # 新增如下内容
+    print("========== post_fake_brand_data ==========")
+    print("status_code:", response.status_code)
+    print("response_text:", response.text)
+    print("==========================================")
+    #上述内容为临时新增打印查看
     if response.status_code != 200:
         return False, "请求修改步数异常：%d" % response.status_code
     response = response.json()
